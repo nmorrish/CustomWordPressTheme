@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html <?php language_attributes()?>>
     <head>
-        <meta charset="utf-8" />
+        <meta charset="<?php bloginfo('charset') ?>" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
+        <meta name="description" content="<?php bloginfo('description') ?>" />
         <meta name="author" content="" />
         <!-- <title>Template</title> -->
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="<?php echo get_template_directory_uri()?>/assets/favicon.ico" />
-        <?php
-            wp_head();
-        ?>
+        <?php wp_head(); ?>
     </head>
-    <body>
+    <body <?php body_class()?>>
+    <?php wp_body_open()?>
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container">

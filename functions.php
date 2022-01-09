@@ -8,6 +8,7 @@ function nickm_theme_support(){
     add_theme_support('menus');
     add_theme_support('custom-logo');
     add_theme_support('post-thumbnails');
+    add_theme_support('widgets');
 }
 add_action('after_setup_theme','nickm_theme_support');
 
@@ -49,7 +50,7 @@ add_action( 'wp_enqueue_scripts', 'nickm_enqueue_scripts');
 /*==============================
   Include Walker Class
   ==============================*/
-  require get_template_directory() . '/inc/walker.php';
+  require get_template_directory() . '/inc/nav-walker.php';
 
-?>
+
 

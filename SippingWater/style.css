@@ -1,0 +1,24 @@
+/*
+Theme Name: Sipping Water
+Theme Domain: Sipping Water
+Version: 1.0
+Description: A responsive bootstrap theme for WordPress
+Author: Nick Morrish
+*/
+
+/* Ensure footer stays at bottom of page */
+body{ height:100vh; margin:0; }
+
+body{ 
+  display:flex; 
+  flex-direction:column; 
+}
+
+footer{
+  margin-top:auto; 
+}
+
+.nm-navbar-logo{
+  max-height: 58px;
+  width: auto;
+}

@@ -1,8 +1,12 @@
 <?php
     get_header();
 ?>
-<section class="py-5 border-bottom" id="features">
+
+<section class="border-bottom" id="features">
     <div class="container px-5 my-5">
+        <div class="text-center mb-5">
+            <h1 class="fw-bolder"><?php the_title()?></h1>
+        </div>
         <?php 
             if( have_posts()){
                 while( have_posts() ){

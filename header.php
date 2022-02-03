@@ -13,7 +13,7 @@
     <body <?php body_class()?>>
     <?php wp_body_open()?>
 
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-navbar">
                 <div class="container">
                     <?php if (function_exists('the_custom_logo')){
                         $custom_logo_id = get_theme_mod('custom_logo');
@@ -37,7 +37,10 @@
                         //'items_wrap' => '<ul id="%1$s" class="navbar-nav ms-auto mb-2 mb-lg-0 %2$s">%3$s</ul>',
                         'walker'         => new Header_Bs_Menu_Walker()
                     ));
+
+                    dynamic_sidebar('header-widgets');
                     ?>
+                    
                 </div>
             </div>
         </nav>

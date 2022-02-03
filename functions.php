@@ -54,5 +54,39 @@ add_action( 'wp_enqueue_scripts', 'nickm_enqueue_scripts');
   ==============================*/
   require get_template_directory() . '/inc/nav-walker.php';
 
+/*==============================
+  Widget Areas
+  ==============================*/
+  function nickm_widget_areas(){
+    register_sidebar(
+      array(
+        'name' => 'Header Widgets',
+        'id' => 'header-widgets',
+        'description' => 'Header Widget Area',
+        'before_title' => '<h2>',
+        'after_title' => '</h2>',
+        'before_widget' => '',
+        'after_widget' => ''
+      )
+    );
+    register_sidebar(
+      array(
+        'name' => 'Footer Widgets',
+        'id' => 'footer-widgets',
+        'description' => 'Footer Widget Area',
+        'before_title' => '<h2>',
+        'after_title' => '</h2>',
+        'before_widget' => '',
+        'after_widget' => ''
+      )
+    );
+  };
 
+  add_action( 'widgets_init', 'nickm_widget_areas');
+
+/*==============================
+  Customiser API
+  ==============================*/
+
+  require get_template_directory() . '/inc/customiser-settings.php';
 

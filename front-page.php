@@ -3,7 +3,8 @@ get_header();
 ?>
 
 <header class="main-page-header">
-    <div class="fade-layer"></div>
+    <div class="fade-layer-1"></div>
+    <div class="fade-layer-2"></div>
     <div class="container px-5">
         <div class="row gx-5 justify-content-center">
             <div class="col-lg-10">
@@ -50,19 +51,27 @@ get_header();
                         echo $img5 != "" ? '\'' . $img5 . '\',' : "";  
                         echo $img6 != "" ? '\'' . $img6 . '\',' : ""; ?>]
 
-     //var i = 0;
 
-      $('.main-page-header').css('background-image', 'url(' + images[0] + ')');
-
-      function imageLoop(i) {
+      $('.fade-layer-1').css('background-image', 'url(' + images[0] + ')');
+      
+      function imageLoop(i, images) {
         setTimeout(function(){
-          i == (images.length - 1) ? i = 0 : i += 1;
-          $('.main-page-header').css('background-image', 'url(' + images[i] + ')');
-          imageLoop(i)
-        },4000);
+            i == (images.length - 1) ? i = 0 : i += 1;
+            $('.fade-layer-2').css('background-image', 'url(' + images[i] + ')');
+            $('.fade-layer-1').fadeOut(1000,imageLoopNextLayer(i, images))
+        },5500);
       }
 
-      imageLoop(0);
+      function imageLoopNextLayer(i, images) {
+        setTimeout(function(){
+            i == (images.length - 1) ? i = 0 : i += 1;
+            console.log(i)
+            $('.fade-layer-1').css('background-image', 'url(' + images[i] + ')');
+            $('.fade-layer-1').fadeIn(1000,imageLoop(i, images))
+        },5500);
+      }
+
+      imageLoop(0, images);
 
 </script>
 <?php

@@ -42,6 +42,8 @@ get_header();
         $img4 = wp_get_attachment_image_url(get_theme_mod('water_home_slider_image_4',''),'large');
         $img5 = wp_get_attachment_image_url(get_theme_mod('water_home_slider_image_5',''),'large');
         $img6 = wp_get_attachment_image_url(get_theme_mod('water_home_slider_image_6',''),'large');
+        echo 'var slideTime = ' . get_theme_mod('water_home_slider_image_time_between','5500') . '; ';
+        echo 'var fadeTime = ' . get_theme_mod('water_home_slider_image_time_fade','1000'). '; ';
      ?>
       var images = [<?php //creates a js array of all images entered in customizer. Array omits null entries so first img is always images[0]
                         echo $img1 != "" ? '\'' . $img1 . '\',' : "";  
@@ -58,17 +60,16 @@ get_header();
         setTimeout(function(){
             i == (images.length - 1) ? i = 0 : i += 1;
             $('.fade-layer-2').css('background-image', 'url(' + images[i] + ')');
-            $('.fade-layer-1').fadeOut(1000,imageLoopNextLayer(i, images))
-        },5500);
+            $('.fade-layer-1').fadeOut(fadeTime,imageLoopNextLayer(i, images))
+        }, slideTime);
       }
 
       function imageLoopNextLayer(i, images) {
         setTimeout(function(){
             i == (images.length - 1) ? i = 0 : i += 1;
-            console.log(i)
             $('.fade-layer-1').css('background-image', 'url(' + images[i] + ')');
-            $('.fade-layer-1').fadeIn(1000,imageLoop(i, images))
-        },5500);
+            $('.fade-layer-1').fadeIn(fadeTime,imageLoop(i, images))
+        }, slideTime);
       }
 
       imageLoop(0, images);

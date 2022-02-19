@@ -1,10 +1,23 @@
 <?php 
 get_header();
+$button1Class = 'btn-' . (get_theme_mod('water_home_action_button_1_outline','primary') != 1 ? 'outline-' : '') . get_theme_mod('water_home_action_button_1_color','primary');
+$button1Text = get_theme_mod('water_home_action_button_1_uri','Get Started');
+$button1URI = get_theme_mod('water_home_action_button_1_text','#');
+
+$button2Class = 'btn-' . (get_theme_mod('water_home_action_button_2_outline','primary') != 1 ? 'outline-' : '') . get_theme_mod('water_home_action_button_2_color','primary');
+$button2Text = get_theme_mod('water_home_action_button_2_text','Get Started');
+$button2URI = get_theme_mod('water_home_action_button_2_uri','#');
+
+$button3Class = 'btn-' . (get_theme_mod('water_home_action_button_3_outline','primary') != 1 ? 'outline-' : '') . get_theme_mod('water_home_action_button_3_color','primary');
+$button3Text = get_theme_mod('water_home_action_button_3_text','Get Started');
+$button3URI = get_theme_mod('water_home_action_button_3_uri','#');
+
 ?>
 
 <header class="main-page-header">
     <div class="fade-layer-1"></div>
     <div class="fade-layer-2"></div>
+    <div class="tint-layer"></div>
     <div class="container px-5">
         <div class="row gx-5 justify-content-center">
             <div class="col-lg-10">
@@ -12,9 +25,18 @@ get_header();
                     <h1 class="display-5 fw-bolder text-white mb-2"><?php echo get_bloginfo('name'); //the_title()?></h1>
                     <h2 class="text-white mb-4"><?php echo get_bloginfo('description');?></h2>
                     <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
-                        <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#features">Get Started</a>
-                        <a class="btn btn-outline-light btn-lg px-4" href="#!">Learn More</a>
+                        <a class="btn <?= $button1Class?> btn-lg px-4 me-sm-3" href="<?= $button1Text ?>"><?= $button1URI?></a>
+                        <?php 
+                            if($button2Text != ''){
+                                echo '<a class="btn ' . $button2Class . ' btn-lg px-4 me-sm-3" href="'. $button2URI . '">' . $button2Text . '</a>';
+                            }
+                            if($button3Text != ''){
+                                echo '<a class="btn ' . $button3Class . ' btn-lg px-4 me-sm-3" href="'. $button3URI . '">' . $button3Text . '</a>';
+                            }
+                        ?>
+                        
                     </div>
+                    
                 </div>
             </div>
         </div>

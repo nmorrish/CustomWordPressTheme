@@ -1,7 +1,18 @@
 
   <?php
-  
   function nickm_customize_register( $wp_customize ) {
+
+    //Load in the alpha color picker plugin and create an array of colors for it to use
+    require_once( dirname( __FILE__ ) . '/../assets/alpha-color-picker/alpha-color-picker.php' );
+    $colorPickerPalette = array(
+      get_theme_mod('water_theme_primary_color','#0d6efd'),
+      get_theme_mod('water_theme_secondary_color','#6c757d'),
+      get_theme_mod('water_theme_success_color','#198754'),
+      get_theme_mod('water_theme_info_color','#0dcaf0'),
+      get_theme_mod('water_theme_warning_color','#ffc107'),
+      get_theme_mod('water_theme_danger_color','#dc3545')
+    );
+    
     //Default homepage settings will be nested under a panel and renamed to 'general settings'
     //default sections are: title_tagline, colors, header_image, background_image, nav, and static_front_page
     $wp_customize->get_section( 'static_front_page' )->panel  = 'water_homepage_settings_panel';
@@ -20,7 +31,8 @@
                                   'description'      => __( 'Adjust general theme settings here' ),
                               ));
 
-    #region Homepage action buttons
+    /*Homepage action buttons; 
+    Action buttons are the large buttons on the front page.*/
     $buttonColorChoices = array( 
         'primary' => __( 'Primary' ),
         'secondary' => __( 'Secondary' ),
@@ -31,7 +43,7 @@
         'light' => __( 'Light' ),
         'dark' => __( 'Dark' )
       );
-    #region 1st Action Button
+    #region 1st Homepage Action Button
     $wp_customize->add_section( 'water_home_action_button_1', array(
       'title' => __( 'Action Button 1' ),
       'description' => __( 'Create a button to bring the user to other parts of the site' ),
@@ -112,7 +124,7 @@
         ));
     #endregion
 
-    #region 2nd Action Button
+    #region 2nd Homepage Action Button
     $wp_customize->add_section( 'water_home_action_button_2', array(
       'title' => __( 'Action Button 2' ),
       'description' => __( 'Create a button to bring the user to other parts of the site. Leave button text blank to omit button.' ),
@@ -193,7 +205,7 @@
         ));
     #endregion
 
-    #region 3rd Action Button
+    #region 3rd Homepage Action Button
     $wp_customize->add_section( 'water_home_action_button_3', array(
       'title' => __( 'Action Button 3' ),
       'description' => __( 'Create a button to bring the user to other parts of the site. Leave button text blank to omit button.' ),
@@ -273,16 +285,77 @@
             'description' => 'Check to make button solid',
         ));
     #endregion
+    /*End Homepage action buttons*/
 
     #region Homepage background image settings
+
     $wp_customize->add_section( 'water_home_image_settings', 
           array(
               'title'         => __( 'Background Image Settings' ),
-              'description' => __( 'Specify images from your media library to display on your main page. They will cycle using the times specified in milliseconds (1 second = 1000 milliseconds). Up to 6 images can be selected' ),
+              'description' => __( 'Specify images from your media library to display on your main page. They will cycle using the times specified in milliseconds (1 second = 1000 milliseconds). Up to 6 images can be selected.    You may also specify apply a color tint.' ),
               'priority'      => 1,
               'panel'         => 'water_homepage_settings_panel',
               'capability' => 'edit_theme_options',
           ));
+
+    $wp_customize->add_setting('main_page_tint_rgba',
+      array(
+        'default'     => 'rgba(110,110,110,0.2)',
+        'type'        => 'theme_mod',
+        'capability'  => 'edit_theme_options',
+        'transport'   => 'postMessage'
+      )
+    );
+  
+    // Alpha Color Picker control.
+    $wp_customize->add_control( new Customize_Alpha_Color_Control(
+        $wp_customize,
+        'alpha_color_control',
+        array(
+          'label'         => __( 'Background image tint'),
+          'section'       => 'water_home_image_settings',
+          'settings'      => 'main_page_tint_rgba',
+          'show_opacity'  => true, // Optional.
+          'palette'	=> $colorPickerPalette
+        )
+      )
+    );
+
+    // $wp_customize->add_setting( 'main_page_tint_color', 
+    //   array(
+    //     'type' => 'theme_mod',
+    //     'capability' => 'edit_theme_options',
+    //     'default' => '#cccccc',
+    //     'transport' => 'refresh', // or postMessage
+    //     'sanitize_callback' => 'sanitize_hex_color',
+    //     ));
+
+    // $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'main_page_tint_color',
+    //     array(
+    //           'label' => __( 'Background Image Tint' ),
+    //           'description' => __('Add a colored tint to the background images'),
+    //           'section' => 'water_home_image_settings',
+    //           'capability' => 'edit_theme_options',
+    //           'type'        => 'color',
+    //   )));
+
+    // $wp_customize->add_setting( 'main_page_tint_opacity', 
+    //   array(
+    //     'type' => 'theme_mod',
+    //     'capability' => 'edit_theme_options',
+    //     'default' => '20',
+    //     'transport' => 'refresh', 
+    //     'sanitize_callback' => 'absint',
+    //     ));
+
+    // $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'main_page_tint_opacity',
+    //     array(
+    //           'label' => __( 'Tint Opacity' ),
+    //           'description' => __('100 is opaque, 0 is transparent'),
+    //           'section' => 'water_home_image_settings',
+    //           'capability' => 'edit_theme_options',
+    //           'type'        => 'number',
+    //   )));
 
     $wp_customize->add_setting( 'water_home_slider_image_time_between', 
           array(
@@ -323,7 +396,7 @@
             )
         ));
 
-    //add settings for the home page slider selector
+    //These settings control each image that can be placed on the main page background
     $wp_customize->add_setting( 'water_home_slider_image_1', 
       array(
         'type' => 'theme_mod',
@@ -377,7 +450,7 @@
         'sanitize_callback' => 'sanitize_text_field',
         ));
 
-    //Add the image control
+    //These are the controls that allow adding each image
     $wp_customize->add_control( 
           new WP_Customize_Cropped_Image_Control(
             $wp_customize,
@@ -448,6 +521,8 @@
             )
         ));
 
+    
+
     $wp_customize->add_control( 
           new WP_Customize_Cropped_Image_Control(
             $wp_customize,
@@ -461,7 +536,6 @@
                 'flex_height'=>true, // Flexible Heiht
             )
         ));
-
     #endregion
 
     #region Theme Options
@@ -616,5 +690,6 @@
     #endregion
   }
   add_action( 'customize_register', 'nickm_customize_register' );
+
 
   ?>

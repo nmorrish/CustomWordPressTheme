@@ -2,6 +2,8 @@
   header("Content-type: text/css"); //allows this php file to be treated like a css file
   require_once(realpath(__DIR__ . DIRECTORY_SEPARATOR . '../../../..' ) . '\wp-load.php' ); //wordpress is not loaded in this file by default. This ensures that it is.
 
+  $tintRGBA = get_theme_mod('main_page_tint_rgba','rgba(110,110,110,0.2)');
+
   function hexToRgb($hex) {
     $r = hexdec(substr($hex,1,2));
     $g = hexdec(substr($hex,3,2));
@@ -37,6 +39,9 @@
 }
 ?>
 :root {
+/*Theme specific styles */
+  --main-page-tint: <?= $tintRGBA?>;
+
 /* Bootstrap */
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;

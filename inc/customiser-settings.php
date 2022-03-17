@@ -321,42 +321,6 @@
       )
     );
 
-    // $wp_customize->add_setting( 'main_page_tint_color', 
-    //   array(
-    //     'type' => 'theme_mod',
-    //     'capability' => 'edit_theme_options',
-    //     'default' => '#cccccc',
-    //     'transport' => 'refresh', // or postMessage
-    //     'sanitize_callback' => 'sanitize_hex_color',
-    //     ));
-
-    // $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'main_page_tint_color',
-    //     array(
-    //           'label' => __( 'Background Image Tint' ),
-    //           'description' => __('Add a colored tint to the background images'),
-    //           'section' => 'water_home_image_settings',
-    //           'capability' => 'edit_theme_options',
-    //           'type'        => 'color',
-    //   )));
-
-    // $wp_customize->add_setting( 'main_page_tint_opacity', 
-    //   array(
-    //     'type' => 'theme_mod',
-    //     'capability' => 'edit_theme_options',
-    //     'default' => '20',
-    //     'transport' => 'refresh', 
-    //     'sanitize_callback' => 'absint',
-    //     ));
-
-    // $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'main_page_tint_opacity',
-    //     array(
-    //           'label' => __( 'Tint Opacity' ),
-    //           'description' => __('100 is opaque, 0 is transparent'),
-    //           'section' => 'water_home_image_settings',
-    //           'capability' => 'edit_theme_options',
-    //           'type'        => 'number',
-    //   )));
-
     $wp_customize->add_setting( 'water_home_slider_image_time_between', 
           array(
             'type' => 'theme_mod',

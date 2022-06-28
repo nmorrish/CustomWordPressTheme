@@ -76,6 +76,7 @@ class Header_Bs_Menu_Walker extends Walker_Nav_menu {
    * @param stdClass $args   An object of wp_nav_menu() arguments.
    */
   public function end_lvl( &$output, $depth = 0, $args = null ) {
+
       if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
           $t = '';
           $n = '';

@@ -14,4 +14,11 @@ $(document).ready(function() {
 		}
 	});
 
+	$('nav .wp-block-search__button').on('click', function(){
+		console.log('header clicked')
+	})
+
+	$('footer .wp-block-search__button').on('click', function(){
+		console.log('footer clicked')
+	})
 });

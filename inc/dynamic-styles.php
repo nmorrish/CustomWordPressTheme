@@ -41,6 +41,7 @@
 :root {
 /*Theme specific styles */
   --main-page-tint: <?= $tintRGBA?>;
+  --main-page-height: 80vh;
 
 /* Bootstrap */
   --bs-blue: #0d6efd;

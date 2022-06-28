@@ -13,7 +13,6 @@ $button3Text = get_theme_mod('water_home_action_button_3_text','Get Started');
 $button3URI = get_theme_mod('water_home_action_button_3_uri','#');
 
 ?>
-
 <header class="main-page-header">
     <div class="fade-layer-1"></div>
     <div class="fade-layer-2"></div>
@@ -42,9 +41,9 @@ $button3URI = get_theme_mod('water_home_action_button_3_uri','#');
         </div>
     </div>
 </header>
-
-<section class="py-5 border-bottom main-page-content" id="features">
+<section class="border-bottom main-page-content" id="features">
     <div class="container px-5 my-5">
+    <?php get_search_form() ?>
         <?php 
             if( have_posts()){
                 while( have_posts() ){
